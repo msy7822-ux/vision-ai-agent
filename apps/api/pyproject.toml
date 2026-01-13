@@ -1,0 +1,36 @@
+[project]
+name = "api"
+version = "0.0.1"
+description = "English Conversation Training API with Vision Agents"
+requires-python = ">=3.11,<3.14"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.34.0",
+    "python-dotenv>=1.0.0",
+    "pydantic>=2.10.0",
+    "pydantic-settings>=2.7.0",
+    "vision-agents[gemini,getstream]>=0.2.9",
+]
+
+[project.optional-dependencies]
+vision = [
+    "vision-agents[getstream,gemini]",
+]
+dev = [
+    "ruff>=0.8.0",
+    "pytest>=8.0.0",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W"]
