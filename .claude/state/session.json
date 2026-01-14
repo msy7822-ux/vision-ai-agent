@@ -3,7 +3,7 @@
   "started_at": "2026-01-14T01:29:21Z",
   "cwd": "/Users/msy/dev/agents/en_conversasion_train",
   "project_name": "en_conversasion_train",
-  "prompt_seq": 19,
+  "prompt_seq": 25,
   "git": {
     "branch": "main",
     "uncommitted_changes": 5,
@@ -352,6 +352,12 @@
       "file": "apps/api/src/agents/base_coach.py",
       "action": "Edit",
       "timestamp": "2026-01-14T03:54:22Z",
+      "important": false
+    },
+    {
+      "file": "apps/api/src/routers/coach.py",
+      "action": "Edit",
+      "timestamp": "2026-01-14T04:30:47Z",
       "important": false
     }
   ],

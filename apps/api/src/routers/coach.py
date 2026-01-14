@@ -61,8 +61,9 @@ async def run_coach_in_call(
     mode: str,
     level: str,
     scenario: str | None = None,
+    max_retries: int = 3,
 ):
-    """Run the coach agent in a call"""
+    """Run the coach agent in a call with retry logic"""
     logger.info(f"Starting coach for call {call_id}: mode={mode}, level={level}, scenario={scenario}")
 
     if mode == "situation":
@@ -70,21 +71,38 @@ async def run_coach_in_call(
     else:
         coach = SituationCoach(level=level, scenario="restaurant")
 
-    agent = coach.create_agent()
+    for attempt in range(max_retries):
+        try:
+            agent = coach.create_agent()
+            call = await agent.create_call(call_type="default", call_id=call_id)
 
-    call = await agent.create_call(call_type="default", call_id=call_id)
+            async with agent.join(call):
+                await agent.simple_response(
+                    "Start the conversation naturally based on your role in the scenario."
+                )
 
-    async with agent.join(call):
-        await agent.simple_response(
-            "Start the conversation naturally based on your role in the scenario."
-        )
+                for _ in range(120):
+                    await asyncio.sleep(5)
+                    # Keep the agent alive and responsive
+                    pass
 
-        for _ in range(120):
-            await asyncio.sleep(5)
-            # Keep the agent alive and responsive
-            pass
+                await agent.finish()
+            # Success - exit retry loop
+            return
 
-        await agent.finish()
+        except TimeoutError as e:
+            logger.warning(f"Attempt {attempt + 1}/{max_retries} failed with timeout: {e}")
+            if attempt < max_retries - 1:
+                await asyncio.sleep(2)  # Wait before retry
+            else:
+                logger.error(f"All {max_retries} attempts failed for call {call_id}")
+
+        except Exception as e:
+            logger.error(f"Attempt {attempt + 1}/{max_retries} failed with error: {e}")
+            if attempt < max_retries - 1:
+                await asyncio.sleep(2)  # Wait before retry
+            else:
+                logger.error(f"All {max_retries} attempts failed for call {call_id}")
 
 
 @router.post("/session/start", response_model=StartSessionResponse)
