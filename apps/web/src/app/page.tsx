@@ -8,10 +8,13 @@ export default function Home() {
         <p className="text-muted-foreground text-lg">
           2ヶ月で英語が話せるようになるアプリ
         </p>
-        <div className="mt-8 flex gap-4 justify-center">
-          <button className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity">
-            Start Training
-          </button>
+        <div className="mt-8 flex gap-4 justify-center flex-wrap">
+          <Link
+            href="/coach"
+            className="bg-primary text-primary-foreground px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"
+          >
+            English Coach
+          </Link>
           <Link
             href="/detect"
             className="bg-green-600 text-white px-6 py-3 rounded-lg font-medium hover:opacity-90 transition-opacity"

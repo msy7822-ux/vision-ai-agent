@@ -1,5 +1,15 @@
 import asyncio
 import uuid
+import warnings
+
+# Suppress dataclasses_json warnings from getstream library
+# These are internal to the library and don't affect functionality
+warnings.filterwarnings(
+    "ignore",
+    message=".*Missing.*value of non-optional type.*",
+    category=RuntimeWarning,
+    module="dataclasses_json"
+)
 
 from fastapi import FastAPI, BackgroundTasks, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -8,6 +18,7 @@ from pydantic import BaseModel
 from src.config import settings
 from src.stream_client import stream_client
 from src.agent import create_agent
+from src.routers import coach_router
 
 app = FastAPI(
     title=settings.app_name,
@@ -119,3 +130,7 @@ async def get_call_token(user_id: str | None = None):
         user_id=user_id,
         api_key=settings.stream_api_key,
     )
+
+
+# Include coach router
+app.include_router(coach_router)
