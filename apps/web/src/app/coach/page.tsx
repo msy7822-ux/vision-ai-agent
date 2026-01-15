@@ -20,6 +20,13 @@ const modes = [
     icon: "🎭",
   },
   {
+    href: "/coach/script",
+    title: "Script Practice",
+    titleJa: "スクリプト練習",
+    description: "Practice conversations with guided scripts - you follow along and speak your lines",
+    icon: "📝",
+  },
+  {
     href: "/coach/freetalk",
     title: "Free Talk",
     titleJa: "フリートーク",
@@ -61,11 +68,12 @@ export default function CoachPage() {
             <button
               key={level.value}
               onClick={() => setSelectedLevel(level.value)}
-              className={`rounded-lg px-6 py-3 transition-all ${
-                selectedLevel === level.value
+              className={
+                "rounded-lg px-6 py-3 transition-all " +
+                (selectedLevel === level.value
                   ? "bg-blue-600 text-white shadow-lg shadow-blue-600/30"
-                  : "bg-slate-700 text-slate-300 hover:bg-slate-600"
-              }`}
+                  : "bg-slate-700 text-slate-300 hover:bg-slate-600")
+              }
             >
               <div className="font-medium">{level.label}</div>
               <div className="text-xs opacity-75">{level.description}</div>
@@ -75,16 +83,17 @@ export default function CoachPage() {
       </div>
 
       {/* Mode Selection */}
-      <div className="grid gap-6 md:grid-cols-3">
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
         {modes.map((mode) => (
           <Link
             key={mode.href}
-            href={mode.disabled ? "#" : `${mode.href}?level=${selectedLevel}`}
-            className={`group relative overflow-hidden rounded-2xl bg-slate-800 p-6 transition-all ${
-              mode.disabled
+            href={mode.disabled ? "#" : mode.href + "?level=" + selectedLevel}
+            className={
+              "group relative overflow-hidden rounded-2xl bg-slate-800 p-6 transition-all " +
+              (mode.disabled
                 ? "cursor-not-allowed opacity-50"
-                : "hover:bg-slate-700 hover:shadow-xl hover:shadow-blue-900/20"
-            }`}
+                : "hover:bg-slate-700 hover:shadow-xl hover:shadow-blue-900/20")
+            }
             onClick={(e) => mode.disabled && e.preventDefault()}
           >
             {mode.disabled && (

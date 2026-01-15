@@ -1,0 +1,24 @@
+{
+  "id": "hotel-checkin",
+  "title": "Hotel Check-in",
+  "title_ja": "ホテルチェックイン",
+  "description": "Practice checking in at a hotel front desk",
+  "difficulty": "beginner",
+  "category": "travel",
+  "estimated_minutes": 5,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Good evening! Welcome to Grand Hotel. How may I help you?" },
+    { "id": 2, "speaker": "user", "text": "Good evening. I have a reservation under the name Tanaka." },
+    { "id": 3, "speaker": "partner", "text": "Let me check... Yes, I found it. A single room for three nights, correct?" },
+    { "id": 4, "speaker": "user", "text": "Yes, that's correct." },
+    { "id": 5, "speaker": "partner", "text": "May I see your ID or passport, please?" },
+    { "id": 6, "speaker": "user", "text": "Sure, here's my passport." },
+    { "id": 7, "speaker": "partner", "text": "Thank you. Would you prefer a room on a higher floor or lower floor?" },
+    { "id": 8, "speaker": "user", "text": "A higher floor would be nice, if available." },
+    { "id": 9, "speaker": "partner", "text": "Perfect. I have a room on the 15th floor for you. Here's your key card." },
+    { "id": 10, "speaker": "user", "text": "Thank you. What time is breakfast served?" },
+    { "id": 11, "speaker": "partner", "text": "Breakfast is from 7 to 10 AM in the restaurant on the second floor." },
+    { "id": 12, "speaker": "user", "text": "Great, thank you for your help." },
+    { "id": 13, "speaker": "partner", "text": "You're welcome! Enjoy your stay." }
+  ]
+}

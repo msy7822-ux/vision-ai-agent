@@ -1,28 +1,22 @@
-import asyncio
 import logging
-import uuid
 
-from fastapi import APIRouter, BackgroundTasks
+from fastapi import APIRouter, HTTPException
 
 from src.agents import SituationCoach
+from src.agents.script_coach import ScriptCoach
+from src.config import settings
 from src.models.coach import (
-    EndSessionRequest,
-    EndSessionResponse,
-    JoinSessionResponse,
     ScenarioInfo,
     ScenariosResponse,
-    StartSessionRequest,
-    StartSessionResponse,
+    VoiceAgentConfigRequest,
+    VoiceAgentConfigResponse,
 )
-from src.stream_client import stream_client
+from src.models.script import ScriptsResponse, ScriptResponse
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 router = APIRouter(prefix="/api/coach", tags=["coach"])
-
-# In-memory session storage (for production, use Redis or a database)
-active_sessions: dict[str, dict] = {}
 
 SCENARIOS = [
     ScenarioInfo(
@@ -56,115 +50,38 @@ SCENARIOS = [
 ]
 
 
-async def run_coach_in_call(
-    call_id: str,
-    mode: str,
-    level: str,
-    scenario: str | None = None,
-    max_retries: int = 3,
-):
-    """Run the coach agent in a call with retry logic"""
-    logger.info(f"Starting coach for call {call_id}: mode={mode}, level={level}, scenario={scenario}")
+@router.post("/voice-agent/config", response_model=VoiceAgentConfigResponse)
+async def get_voice_agent_config(request: VoiceAgentConfigRequest):
+    """
+    Get Voice Agent configuration for frontend direct connection.
 
-    if mode == "situation":
-        coach = SituationCoach(level=level, scenario=scenario)
-    else:
-        coach = SituationCoach(level=level, scenario="restaurant")
-
-    for attempt in range(max_retries):
-        try:
-            agent = coach.create_agent()
-            call = await agent.create_call(call_type="default", call_id=call_id)
-
-            async with agent.join(call):
-                await agent.simple_response(
-                    "Start the conversation naturally based on your role in the scenario."
-                )
-
-                for _ in range(120):
-                    await asyncio.sleep(5)
-                    # Keep the agent alive and responsive
-                    pass
-
-                await agent.finish()
-            # Success - exit retry loop
-            return
-
-        except TimeoutError as e:
-            logger.warning(f"Attempt {attempt + 1}/{max_retries} failed with timeout: {e}")
-            if attempt < max_retries - 1:
-                await asyncio.sleep(2)  # Wait before retry
-            else:
-                logger.error(f"All {max_retries} attempts failed for call {call_id}")
-
-        except Exception as e:
-            logger.error(f"Attempt {attempt + 1}/{max_retries} failed with error: {e}")
-            if attempt < max_retries - 1:
-                await asyncio.sleep(2)  # Wait before retry
-            else:
-                logger.error(f"All {max_retries} attempts failed for call {call_id}")
-
-
-@router.post("/session/start", response_model=StartSessionResponse)
-async def start_session(request: StartSessionRequest):
-    """Start a new coaching session"""
-    call_id = str(uuid.uuid4())
-
-    await stream_client.create_call(call_id=call_id, call_type="default")
-
-    # Store session info for later use when coach joins
-    active_sessions[call_id] = {
-        "mode": request.mode,
-        "level": request.level,
-        "scenario": request.scenario,
-    }
-    logger.info(f"Session created: {call_id} with config: {active_sessions[call_id]}")
-
-    return StartSessionResponse(
-        call_id=call_id,
-        mode=request.mode,
-        level=request.level,
-        scenario=request.scenario,
-    )
-
-
-@router.post("/session/{call_id}/join", response_model=JoinSessionResponse)
-async def join_session(call_id: str, background_tasks: BackgroundTasks):
-    """Have the coach join an existing session"""
-    # Get session config from storage
-    session_config = active_sessions.get(call_id, {})
-    mode = session_config.get("mode", "situation")
-    level = session_config.get("level", "beginner")
-    scenario = session_config.get("scenario", "restaurant")
-
-    logger.info(f"Coach joining session {call_id}: mode={mode}, level={level}, scenario={scenario}")
-
-    background_tasks.add_task(
-        run_coach_in_call,
-        call_id=call_id,
-        mode=mode,
-        level=level,
-        scenario=scenario,
-    )
-
-    return JoinSessionResponse(
-        status="joining",
-        call_id=call_id,
-        message="Coach is joining the session",
-    )
-
-
-@router.post("/session/{call_id}/end", response_model=EndSessionResponse)
-async def end_session(call_id: str, request: EndSessionRequest):
-    """End a coaching session and save progress"""
+    Returns the system prompt and greeting based on mode, level, and scenario.
+    Frontend will use this to configure the Deepgram WebSocket connection.
+    """
     logger.info(
-        f"Session {call_id} ended: duration={request.duration}s, "
-        f"messages={request.messages_exchanged}"
+        f"Voice Agent config requested: mode={request.mode}, "
+        f"level={request.level}, scenario={request.scenario}, script_id={request.script_id}"
     )
 
-    return EndSessionResponse(
-        status="completed",
-        message="Session ended successfully",
+    if request.mode == "script":
+        if not request.script_id:
+            raise HTTPException(status_code=400, detail="script_id is required for script mode")
+        coach = ScriptCoach(level=request.level, script_id=request.script_id)
+        if not coach.script:
+            raise HTTPException(status_code=404, detail=f"Script not found: {request.script_id}")
+    elif request.mode == "situation":
+        coach = SituationCoach(level=request.level, scenario=request.scenario)
+    else:
+        coach = SituationCoach(level=request.level, scenario="restaurant")
+
+    return VoiceAgentConfigResponse(
+        api_key=settings.deepgram_api_key,
+        prompt=coach.get_full_instructions(),
+        greeting=coach.get_greeting(),
+        voice="aura-2-odysseus-en",
+        listen_model="nova-3",
+        think_provider="open_ai",
+        think_model="gpt-4o-mini",
     )
 
 
@@ -172,3 +89,19 @@ async def end_session(call_id: str, request: EndSessionRequest):
 async def get_scenarios():
     """Get list of available scenarios"""
     return ScenariosResponse(scenarios=SCENARIOS)
+
+
+@router.get("/scripts", response_model=ScriptsResponse)
+async def get_scripts():
+    """Get list of available practice scripts"""
+    scripts = ScriptCoach.list_scripts()
+    return ScriptsResponse(scripts=scripts)
+
+
+@router.get("/scripts/{script_id}", response_model=ScriptResponse)
+async def get_script(script_id: str):
+    """Get a specific practice script by ID"""
+    script = ScriptCoach.load_script(script_id)
+    if not script:
+        raise HTTPException(status_code=404, detail=f"Script not found: {script_id}")
+    return ScriptResponse(script=script)

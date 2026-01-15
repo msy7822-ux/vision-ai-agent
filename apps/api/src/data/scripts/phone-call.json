@@ -1,0 +1,25 @@
+{
+  "id": "phone-call",
+  "title": "Business Phone Call",
+  "title_ja": "ビジネス電話",
+  "description": "Handle professional phone calls with confidence",
+  "difficulty": "intermediate",
+  "category": "business",
+  "estimated_minutes": 5,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Good afternoon, ABC Corporation. This is Jennifer speaking. How may I help you?" },
+    { "id": 2, "speaker": "user", "text": "Good afternoon. This is Taro Yamada calling from XYZ Company. May I speak with Mr. Johnson, please?" },
+    { "id": 3, "speaker": "partner", "text": "I'm sorry, Mr. Johnson is in a meeting right now. Would you like to leave a message?" },
+    { "id": 4, "speaker": "user", "text": "Yes, please. Could you ask him to call me back regarding our upcoming project?" },
+    { "id": 5, "speaker": "partner", "text": "Of course. May I have your phone number?" },
+    { "id": 6, "speaker": "user", "text": "Yes, it's 03-1234-5678. That's zero three, one two three four, five six seven eight." },
+    { "id": 7, "speaker": "partner", "text": "Let me confirm: zero three, one two three four, five six seven eight. Is that correct?" },
+    { "id": 8, "speaker": "user", "text": "Yes, that's correct." },
+    { "id": 9, "speaker": "partner", "text": "And what time would be best to reach you?" },
+    { "id": 10, "speaker": "user", "text": "Anytime between 2 and 5 PM would be fine." },
+    { "id": 11, "speaker": "partner", "text": "I'll make sure he gets the message. Is there anything else I can help you with?" },
+    { "id": 12, "speaker": "user", "text": "No, that's all. Thank you for your help." },
+    { "id": 13, "speaker": "partner", "text": "You're welcome. Have a great day!" },
+    { "id": 14, "speaker": "user", "text": "You too. Goodbye." }
+  ]
+}

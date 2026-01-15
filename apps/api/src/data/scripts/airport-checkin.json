@@ -1,0 +1,25 @@
+{
+  "id": "airport-checkin",
+  "title": "Airport Check-in",
+  "title_ja": "空港チェックイン",
+  "description": "Navigate the airport check-in process with confidence",
+  "difficulty": "intermediate",
+  "category": "travel",
+  "estimated_minutes": 5,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Good morning! May I see your passport and booking confirmation?" },
+    { "id": 2, "speaker": "user", "text": "Good morning. Here they are." },
+    { "id": 3, "speaker": "partner", "text": "Thank you. I see you're flying to Los Angeles today. Are you checking any bags?" },
+    { "id": 4, "speaker": "user", "text": "Yes, I have one suitcase to check and one carry-on." },
+    { "id": 5, "speaker": "partner", "text": "Please place your suitcase on the scale. Do you have a seat preference?" },
+    { "id": 6, "speaker": "user", "text": "I'd prefer a window seat if possible." },
+    { "id": 7, "speaker": "partner", "text": "I have a window seat available in row 24. Is that okay?" },
+    { "id": 8, "speaker": "user", "text": "That's perfect, thank you." },
+    { "id": 9, "speaker": "partner", "text": "Your bag weighs 22 kilograms, which is within the limit. Here's your boarding pass." },
+    { "id": 10, "speaker": "user", "text": "Thank you. Which gate should I go to?" },
+    { "id": 11, "speaker": "partner", "text": "Your flight departs from Gate B12. Boarding begins at 10:30 AM." },
+    { "id": 12, "speaker": "user", "text": "Got it. Is there a lounge I can use?" },
+    { "id": 13, "speaker": "partner", "text": "Yes, there's a lounge near Gate B8. Have a safe flight!" },
+    { "id": 14, "speaker": "user", "text": "Thank you so much. Have a nice day!" }
+  ]
+}

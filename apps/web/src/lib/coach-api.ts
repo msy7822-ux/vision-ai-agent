@@ -1,42 +1,25 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:8000";
 
-export interface TokenResponse {
-  token: string;
-  user_id: string;
-  api_key: string;
-}
-
-export interface CreateCoachCallRequest {
+export interface VoiceAgentConfigRequest {
   mode: "freetalk" | "pronunciation" | "situation";
   level: "beginner" | "intermediate" | "advanced";
   scenario?: string;
 }
 
-export interface CreateCoachCallResponse {
-  call_id: string;
-  mode: string;
-  level: string;
-  scenario?: string;
+export interface VoiceAgentConfigResponse {
+  api_key: string;
+  prompt: string;
+  greeting: string;
+  voice: string;
+  listen_model: string;
+  think_provider: string;
+  think_model: string;
 }
 
-export interface JoinCoachCallResponse {
-  status: string;
-  call_id: string;
-  message: string;
-}
-
-export async function getCallToken(): Promise<TokenResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/call/token`);
-  if (!response.ok) {
-    throw new Error(`Failed to get token: ${response.statusText}`);
-  }
-  return response.json();
-}
-
-export async function createCoachCall(
-  request: CreateCoachCallRequest
-): Promise<CreateCoachCallResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/coach/session/start`, {
+export async function getVoiceAgentConfig(
+  request: VoiceAgentConfigRequest
+): Promise<VoiceAgentConfigResponse> {
+  const response = await fetch(`${API_BASE_URL}/api/coach/voice-agent/config`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -44,22 +27,7 @@ export async function createCoachCall(
     body: JSON.stringify(request),
   });
   if (!response.ok) {
-    throw new Error(`Failed to create coach call: ${response.statusText}`);
-  }
-  return response.json();
-}
-
-export async function joinCoachCall(
-  callId: string
-): Promise<JoinCoachCallResponse> {
-  const response = await fetch(`${API_BASE_URL}/api/coach/session/${callId}/join`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-  });
-  if (!response.ok) {
-    throw new Error(`Failed to join coach call: ${response.statusText}`);
+    throw new Error(`Failed to get voice agent config: ${response.statusText}`);
   }
   return response.json();
 }

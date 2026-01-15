@@ -1,1 +1,5 @@
-{"prompt_seq": 9, "selected": ["claude-code-harness:impl"], "mode": "declared"}
+{
+  "prompt_seq": 24,
+  "selected": ["claude-code-harness:impl"],
+  "mode": "declared"
+}

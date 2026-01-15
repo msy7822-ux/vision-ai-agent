@@ -136,3 +136,13 @@ For example: "Welcome to [place]! [Opening line appropriate to scenario]"
 
 {scenario_prompt}
 """
+
+    def get_greeting(self) -> str:
+        """Return scenario-specific initial greeting"""
+        greetings = {
+            "restaurant": "Welcome to Joe's Diner! How many in your party today?",
+            "directions": "Excuse me! You look a bit lost. Can I help you find something?",
+            "hotel": "Good afternoon! Welcome to the Grand Hotel. Checking in today?",
+            "shopping": "Hello! Welcome to Fashion Plus. Looking for anything special today?",
+        }
+        return greetings.get(self.scenario, greetings["restaurant"])

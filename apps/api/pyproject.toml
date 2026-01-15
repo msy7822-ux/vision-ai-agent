@@ -1,7 +1,7 @@
 [project]
 name = "api"
 version = "0.0.1"
-description = "English Conversation Training API with Vision Agents"
+description = "English Conversation Training API with Deepgram Voice Agent"
 requires-python = ">=3.11,<3.14"
 dependencies = [
     "fastapi>=0.115.0",
@@ -9,12 +9,14 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "pydantic>=2.10.0",
     "pydantic-settings>=2.7.0",
-    "vision-agents[gemini,getstream]>=0.2.9",
+    "deepgram-sdk>=4.0.0",
+    "websockets>=12.0",
+    "getstream>=2.5.0",
 ]
 
 [project.optional-dependencies]
-vision = [
-    "vision-agents[getstream,gemini]",
+deepgram = [
+    "deepgram-sdk>=4.0.0",
 ]
 dev = [
     "ruff>=0.8.0",

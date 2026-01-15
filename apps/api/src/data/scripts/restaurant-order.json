@@ -1,0 +1,25 @@
+{
+  "id": "restaurant-order",
+  "title": "Restaurant Order",
+  "title_ja": "レストラン注文",
+  "description": "Order a meal at a restaurant like a local",
+  "difficulty": "intermediate",
+  "category": "travel",
+  "estimated_minutes": 5,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Good evening! Welcome to Riverside Grill. Table for one?" },
+    { "id": 2, "speaker": "user", "text": "Yes, just me tonight." },
+    { "id": 3, "speaker": "partner", "text": "Right this way. Here's your menu. Can I start you off with something to drink?" },
+    { "id": 4, "speaker": "user", "text": "I'll have a glass of sparkling water, please." },
+    { "id": 5, "speaker": "partner", "text": "Of course. Are you ready to order, or do you need a few minutes?" },
+    { "id": 6, "speaker": "user", "text": "I think I'm ready. What do you recommend?" },
+    { "id": 7, "speaker": "partner", "text": "Our grilled salmon is very popular. It comes with seasonal vegetables." },
+    { "id": 8, "speaker": "user", "text": "That sounds great. I'll have the salmon." },
+    { "id": 9, "speaker": "partner", "text": "Excellent choice. Would you like to add a side salad or soup?" },
+    { "id": 10, "speaker": "user", "text": "I'll add a Caesar salad, please." },
+    { "id": 11, "speaker": "partner", "text": "Perfect. Any allergies or dietary restrictions I should know about?" },
+    { "id": 12, "speaker": "user", "text": "No, none at all." },
+    { "id": 13, "speaker": "partner", "text": "Great. Your order will be ready in about 15 minutes." },
+    { "id": 14, "speaker": "user", "text": "Thank you!" }
+  ]
+}

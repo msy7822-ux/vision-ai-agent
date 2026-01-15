@@ -72,3 +72,25 @@
 - （必要に応じて追記）
 
 ---
+
+## セッション: 2026-01-14T10:04:41Z
+
+- session_id: `763601AF-A50E-49D5-9D2D-81BBAF319163`
+- project: `en_conversasion_train`
+- branch: `main`
+- started_at: `2026-01-14T07:45:55Z`
+- ended_at: `2026-01-14T10:04:41Z`
+- duration_minutes: 678
+- changes: 5
+
+### 変更ファイル
+- `/Users/msy/.claude/plans/immutable-puzzling-flamingo.md`
+- `.claude/state/skills-decision.json`
+
+### 重要な変更（important=true）
+- （なし）
+
+### 次回への引き継ぎ（任意）
+- （必要に応じて追記）
+
+---

@@ -3,7 +3,7 @@ from typing import Literal, Optional
 from pydantic import BaseModel
 
 Level = Literal["beginner", "intermediate", "advanced"]
-Mode = Literal["freetalk", "pronunciation", "situation"]
+Mode = Literal["freetalk", "pronunciation", "situation", "script"]
 Scenario = Literal["restaurant", "directions", "hotel", "shopping"]
 
 
@@ -46,3 +46,22 @@ class ScenarioInfo(BaseModel):
 
 class ScenariosResponse(BaseModel):
     scenarios: list[ScenarioInfo]
+
+
+class VoiceAgentConfigRequest(BaseModel):
+    """Request for Voice Agent configuration"""
+    mode: Mode
+    level: Level = "beginner"
+    scenario: Optional[Scenario] = None
+    script_id: Optional[str] = None
+
+
+class VoiceAgentConfigResponse(BaseModel):
+    """Voice Agent configuration for frontend direct connection"""
+    api_key: str
+    prompt: str
+    greeting: str
+    voice: str = "aura-2-odysseus-en"
+    listen_model: str = "nova-3"
+    think_provider: str = "open_ai"
+    think_model: str = "gpt-4o-mini"

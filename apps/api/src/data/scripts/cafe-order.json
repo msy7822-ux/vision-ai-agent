@@ -1,0 +1,20 @@
+{
+  "id": "cafe-order",
+  "title": "Ordering at a Cafe",
+  "title_ja": "カフェでの注文",
+  "description": "Practice ordering your favorite drink at a coffee shop",
+  "difficulty": "beginner",
+  "category": "daily",
+  "estimated_minutes": 3,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Hi! Welcome to Coffee House. What can I get for you today?" },
+    { "id": 2, "speaker": "user", "text": "Hi, I'd like a medium latte, please." },
+    { "id": 3, "speaker": "partner", "text": "Sure! Would you like that hot or iced?" },
+    { "id": 4, "speaker": "user", "text": "Iced, please." },
+    { "id": 5, "speaker": "partner", "text": "Any milk preference? We have oat, almond, or regular." },
+    { "id": 6, "speaker": "user", "text": "Oat milk would be great." },
+    { "id": 7, "speaker": "partner", "text": "Perfect! That'll be $5.50. Will that be all?" },
+    { "id": 8, "speaker": "user", "text": "Yes, that's all. Thank you!" },
+    { "id": 9, "speaker": "partner", "text": "Great! Your order will be ready in just a moment." }
+  ]
+}

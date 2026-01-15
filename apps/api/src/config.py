@@ -22,7 +22,10 @@ class Settings(BaseSettings):
     stream_api_key: str = ""
     stream_api_secret: str = ""
 
-    # Gemini
+    # Deepgram Voice Agent
+    deepgram_api_key: str = ""
+
+    # Gemini (LLM provider for Deepgram Voice Agent)
     google_api_key: str = ""
 
     # CORS - 環境変数 CORS_ORIGINS をカンマ区切りで指定可能

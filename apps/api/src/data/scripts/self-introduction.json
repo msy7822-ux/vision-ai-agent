@@ -1,0 +1,21 @@
+{
+  "id": "self-introduction",
+  "title": "Self Introduction",
+  "title_ja": "自己紹介",
+  "description": "Learn how to introduce yourself in a casual setting",
+  "difficulty": "beginner",
+  "category": "daily",
+  "estimated_minutes": 2,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Hi there! I don't think we've met. I'm Sarah." },
+    { "id": 2, "speaker": "user", "text": "Nice to meet you, Sarah. I'm Taro." },
+    { "id": 3, "speaker": "partner", "text": "Nice to meet you too, Taro! Where are you from?" },
+    { "id": 4, "speaker": "user", "text": "I'm from Tokyo, Japan. How about you?" },
+    { "id": 5, "speaker": "partner", "text": "I'm from San Francisco. What brings you here?" },
+    { "id": 6, "speaker": "user", "text": "I'm here for a business trip. I work in software development." },
+    { "id": 7, "speaker": "partner", "text": "That's interesting! How long have you been in the industry?" },
+    { "id": 8, "speaker": "user", "text": "About five years now. I really enjoy it." },
+    { "id": 9, "speaker": "partner", "text": "That's great! It was nice meeting you." },
+    { "id": 10, "speaker": "user", "text": "You too! Have a great day." }
+  ]
+}

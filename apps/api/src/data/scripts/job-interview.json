@@ -1,0 +1,33 @@
+{
+  "id": "job-interview",
+  "title": "Job Interview",
+  "title_ja": "就職面接",
+  "description": "Practice common job interview questions and answers",
+  "difficulty": "advanced",
+  "category": "business",
+  "estimated_minutes": 10,
+  "lines": [
+    { "id": 1, "speaker": "partner", "text": "Good morning! Thank you for coming in today. Please, have a seat." },
+    { "id": 2, "speaker": "user", "text": "Good morning. Thank you for having me." },
+    { "id": 3, "speaker": "partner", "text": "Let's start. Can you tell me a little about yourself?" },
+    { "id": 4, "speaker": "user", "text": "Of course. I'm a software engineer with five years of experience in web development. I specialize in React and Node.js." },
+    { "id": 5, "speaker": "partner", "text": "That's impressive. What attracted you to this position?" },
+    { "id": 6, "speaker": "user", "text": "I've always admired your company's innovative approach to technology. I believe my skills would be a great fit for your team." },
+    { "id": 7, "speaker": "partner", "text": "Can you describe a challenging project you've worked on?" },
+    { "id": 8, "speaker": "user", "text": "Sure. I led a project to rebuild our e-commerce platform. We improved page load times by 40% and increased conversions by 25%." },
+    { "id": 9, "speaker": "partner", "text": "How do you handle tight deadlines and pressure?" },
+    { "id": 10, "speaker": "user", "text": "I prioritize tasks based on impact and break large projects into smaller milestones. Clear communication with the team is essential." },
+    { "id": 11, "speaker": "partner", "text": "Where do you see yourself in five years?" },
+    { "id": 12, "speaker": "user", "text": "I hope to grow into a technical lead role, mentoring junior developers while contributing to architecture decisions." },
+    { "id": 13, "speaker": "partner", "text": "What's your greatest strength?" },
+    { "id": 14, "speaker": "user", "text": "I'm a strong problem solver. I enjoy analyzing complex issues and finding efficient solutions." },
+    { "id": 15, "speaker": "partner", "text": "And what would you say is an area for improvement?" },
+    { "id": 16, "speaker": "user", "text": "I sometimes focus too much on details. I've been working on balancing perfectionism with pragmatic delivery." },
+    { "id": 17, "speaker": "partner", "text": "Do you have any questions for us?" },
+    { "id": 18, "speaker": "user", "text": "Yes. Could you tell me about the team I'd be working with and the projects currently in progress?" },
+    { "id": 19, "speaker": "partner", "text": "Great question. We have a team of eight engineers working on our mobile app and API platform." },
+    { "id": 20, "speaker": "user", "text": "That sounds exciting. Thank you for sharing that information." },
+    { "id": 21, "speaker": "partner", "text": "Thank you for your time today. We'll be in touch within a week." },
+    { "id": 22, "speaker": "user", "text": "Thank you. I look forward to hearing from you." }
+  ]
+}
